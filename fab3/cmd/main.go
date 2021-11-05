@@ -131,7 +131,7 @@ func runFab3(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("Failed to create Fabric SDK Ledger Client: %s\n", err)
 	}
 
-	rawLogger, err := zap.NewProduction()
+	rawLogger, err := zap.NewDevelopment()
 	if err != nil {
 		sdk.Close()
 		return fmt.Errorf("Failed to create logger: %s\n", err)
