@@ -25,3 +25,8 @@ func (s *NetService) Version(r *http.Request, _ *interface{}, reply *string) err
 	*reply = hex.EncodeToString([]byte(NetworkID))
 	return nil
 }
+
+func (s *NetService) Listening(r *http.Request, _ *interface{}, reply *string) error {
+	*reply = "true"
+	return nil
+}
