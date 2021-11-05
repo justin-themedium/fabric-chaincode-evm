@@ -70,6 +70,7 @@ type LedgerClient interface {
 type EthService interface {
 	GetCode(r *http.Request, arg *string, reply *string) error
 	Call(r *http.Request, args *types.EthArgs, reply *string) error
+	ChainId(r *http.Request, args *types.EthArgs, reply *string) error
 	SendTransaction(r *http.Request, args *types.EthArgs, reply *string) error
 	GetTransactionReceipt(r *http.Request, arg *string, reply *types.TxReceipt) error
 	Accounts(r *http.Request, arg *string, reply *[]string) error
@@ -130,6 +131,12 @@ func (s *ethService) Call(r *http.Request, args *types.EthArgs, reply *string) e
 	// Clients expect the prefix to present in responses
 	*reply = "0x" + hex.EncodeToString(response.Payload)
 
+	return nil
+}
+
+func (s *ethService) ChainId(r *http.Request, args *types.EthArgs, reply *string) error {
+	s.logger.Debug("ChainId called")
+	*reply = "0x1"
 	return nil
 }
 
