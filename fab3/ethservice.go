@@ -123,6 +123,13 @@ func (s *ethService) GetCode(r *http.Request, arg *string, reply *string) error 
 }
 
 func (s *ethService) Call(r *http.Request, args *types.EthArgs, reply *string) error {
+	e, err := json.Marshal(*args)
+	if err != nil {
+		fmt.Println(err)
+		return fmt.Errorf("Failed to query the ledger: %s", err)
+	}
+	s.logger.Debug("Call called: ", string(e))
+
 	response, err := s.query(s.ccid, strip0x(args.To), [][]byte{[]byte(strip0x(args.Data))})
 
 	if err != nil {
