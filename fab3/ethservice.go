@@ -235,6 +235,7 @@ func (s *ethService) Accounts(r *http.Request, arg *string, reply *[]string) err
 		return fmt.Errorf("Failed to query the ledger: %s", err)
 	}
 
+	s.logger.Info("Accounts: ", string(response.Payload))
 	*reply = []string{"0x" + strings.ToLower(string(response.Payload))}
 
 	return nil
