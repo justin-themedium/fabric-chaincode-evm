@@ -269,7 +269,10 @@ func (s *ethService) EstimateGas(r *http.Request, _ *types.EthArgs, reply *strin
 // Always returns zero.
 func (s *ethService) GetBalance(r *http.Request, p *[]string, reply *string) error {
 	s.logger.Debug("GetBalance called")
-	*reply = "0x0"
+
+	s.logger.Debug(strings.Join(*p, ", "))
+
+	*reply = "0x100000000000000000000000"
 	return nil
 }
 
